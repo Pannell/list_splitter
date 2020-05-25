@@ -1,2 +1,3 @@
-# list_splitter
-Splits a list of items into batches
+# List Splitter
+
+Takes a list of items (separated by new lines) and splits it into a defined number of batches, onto the clipboard one by one.
