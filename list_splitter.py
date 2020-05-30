@@ -1,4 +1,4 @@
-import pyperclip, decimal
+import pyperclip, decimal, random
 
 # Take list of items from the clipboard
 rawinput = pyperclip.paste()
@@ -11,6 +11,22 @@ listsize = len(inputlist)
 
 # Initial starting point for list slice
 start = 0
+
+# Randomisation or Sorting choice
+print('Would you like to Randomise or Sort the list first?')
+print('1 = No Sorting')
+print('2 = Randomise')
+print('3 = Sort Ascending')
+print('4 = Sort Descending')
+mix = int(input())
+if mix == 2:
+    random.shuffle(inputlist)
+elif mix == 3:
+    inputlist.sort()
+elif mix == 4:
+    inputlist.sort(reverse=True)
+else:
+    print('ok')
 
 # Loop to check batch sizes are correct
 switch = False
@@ -35,14 +51,14 @@ while switch == False:
         else:
             continue
     else:
-        print('Split this into ' + str(batches) + ' batches. ' + str(batches - 1) + ' batches of ' + str(roundbatch) + ' and 1 batch of ' + str(listsize % batches) + '. Proceed?  (Y/N)'
+        print('Split this into ' + str(batches) + ' batches. ' + str(batches - 1) + ' batches of ' + str(roundbatch) + ' and 1 batch of ' + str(listsize - ((batches - 1) * roundbatch)) + '. Proceed?  (Y/N)')
         checkpoint = input()
         checkpoint.upper()
         if checkpoint == 'Y':
             break
         else:
             continue
-    
+
 # Loop to create batches
 for i in range(1, (batches + 1)):
     # Dictate end point of slice
@@ -56,7 +72,7 @@ for i in range(1, (batches + 1)):
     # Notify user
     print('Batch ' + str(i) + ' is on the clipboard.')
     # Wait until user confirms they have pasted the batch from the clipboard
-    print('Proceed? (Y/N)')
+    print('Proceed?')
     command = input()
     command.upper()
     if command == 'Y':
